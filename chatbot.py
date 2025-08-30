@@ -6,6 +6,7 @@ from urllib.parse import urljoin
 import os
 import gradio as gr
 
+# pip freeze > requirements.txt
 url = r"https://kidobotics.com/index.html"
 response = requests.get(url)
 soup = BeautifulSoup(response.content,'html.parser')
@@ -58,4 +59,10 @@ def chat(message,history):
         new_res+= res
         yield new_res
 
-gr.ChatInterface(fn=chat).launch(share=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", os.environ.get("GRADIO_SERVER_PORT", 7860)))
+    gr.ChatInterface(fn=chat).launch(
+        server_name="0.0.0.0",  
+        server_port=port,
+        share=False            
+    )
