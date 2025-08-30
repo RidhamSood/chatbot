@@ -6,7 +6,6 @@ from urllib.parse import urljoin
 import os
 import gradio as gr
 
-# pip freeze > requirements.txt
 url = r"https://kidobotics.com/index.html"
 response = requests.get(url)
 soup = BeautifulSoup(response.content,'html.parser')
